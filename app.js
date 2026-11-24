@@ -9,14 +9,22 @@ function partir(elemento, retrasoBase = 0) {
       if (hijo.nodeType === Node.TEXT_NODE) {
         // Los espacios del HTML entre etiquetas no son letras.
         if (!hijo.textContent.trim()) return hijo.remove();
+        // Cada palabra va en un bloque que no se corta, y adentro cada letra se anima sola.
         const fragmento = document.createDocumentFragment();
-        [...hijo.textContent.replace(/\s+/g, " ")].forEach((caracter) => {
-          const span = document.createElement("span");
-          span.className = "letra";
-          span.textContent = caracter;
-          span.style.setProperty("--i", i++);
-          span.style.setProperty("--d", retrasoBase + "ms");
-          fragmento.appendChild(span);
+        hijo.textContent.replace(/\s+/g, " ").split(/( )/).forEach((parte) => {
+          if (!parte) return;
+          if (parte === " ") return fragmento.appendChild(document.createTextNode(" "));
+          const palabra = document.createElement("span");
+          palabra.className = "palabra";
+          [...parte].forEach((caracter) => {
+            const span = document.createElement("span");
+            span.className = "letra";
+            span.textContent = caracter;
+            span.style.setProperty("--i", i++);
+            span.style.setProperty("--d", retrasoBase + "ms");
+            palabra.appendChild(span);
+          });
+          fragmento.appendChild(palabra);
         });
         hijo.replaceWith(fragmento);
       } else if (hijo.nodeType === Node.ELEMENT_NODE) {
