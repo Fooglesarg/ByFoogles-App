@@ -3,88 +3,180 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>ByFoogles · Apps</title>
-  <meta name="description" content="ByFoogles es un estudio independiente de apps hecho en Argentina. Apps simples, sin anuncios y que funcionan sin internet.">
-  <meta name="theme-color" content="#0b0b10">
+  <title>ByFoogles · Estudio de apps</title>
+  <meta name="description" content="ByFoogles es un estudio independiente de apps hecho en Argentina. Apps sin anuncios, sin cuentas y que funcionan sin internet.">
+  <meta name="theme-color" content="#05040a">
   <link rel="canonical" href="https://byfoogles.app/">
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="ByFoogles · Apps">
+  <meta property="og:title" content="ByFoogles · Estudio de apps">
   <meta property="og:description" content="Estudio independiente de apps hecho en Argentina.">
   <meta property="og:url" content="https://byfoogles.app/">
+  <meta property="og:image" content="https://byfoogles.app/img/compartir.jpg">
   <meta property="og:locale" content="es_AR">
-  <style>
-    @font-face { font-family: "Outfit"; src: url("/fuentes/outfit.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
-    :root { --fondo: #0b0b10; --superficie: #15151d; --borde: #26262f; --texto: #f5f5f7; --suave: #9b9ba8; --acento: #ff2ec4; }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: "Outfit", system-ui, sans-serif; background: var(--fondo); color: var(--texto); line-height: 1.6; font-size: 17px; -webkit-font-smoothing: antialiased; }
-    a { color: inherit; }
-    .envoltura { width: min(1000px, 100% - 40px); margin-inline: auto; }
-    header .envoltura { display: flex; align-items: center; height: 72px; }
-    .marca { font-weight: 800; font-size: 22px; letter-spacing: -.3px; text-decoration: none; }
-    .marca span { color: var(--acento); }
-    .portada { padding: 96px 0 72px; }
-    .etiqueta { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--suave); font-weight: 600; margin-bottom: 18px; }
-    h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.05; letter-spacing: -1.5px; max-width: 800px; }
-    h1 em { font-style: normal; color: var(--acento); }
-    .lema { color: var(--suave); font-size: clamp(18px, 2vw, 21px); max-width: 600px; margin-top: 22px; }
-    h2 { font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: var(--suave); font-weight: 600; margin-bottom: 20px; }
-    .apps { padding: 24px 0 80px; }
-    .app { display: grid; grid-template-columns: 120px 1fr auto; gap: 28px; align-items: center; background: var(--superficie); border: 1px solid var(--borde); border-radius: 28px; padding: 28px; text-decoration: none; transition: border-color .2s, transform .2s; }
-    .app:hover { border-color: #3a3a46; transform: translateY(-2px); }
-    .app img { width: 120px; height: 120px; border-radius: 27px; }
-    .app h3 { font-size: 28px; line-height: 1.2; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .app p { color: var(--suave); margin-top: 6px; }
-    .app .datos { margin-top: 10px; font-size: 14px; color: var(--suave); }
-    .chip { font-size: 13px; font-weight: 700; border: 1.5px solid #ff3b5c; color: #ff3b5c; border-radius: 8px; padding: 1px 8px; }
-    .ir { font-weight: 700; white-space: nowrap; color: var(--acento); }
-    @media (max-width: 680px) { .app { grid-template-columns: 1fr; text-align: left; } .app img { width: 96px; height: 96px; border-radius: 22px; } }
-    .proximamente { margin-top: 16px; border: 1px dashed var(--borde); border-radius: 28px; padding: 28px; color: var(--suave); }
-    .valores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 80px; }
-    .valor { border-top: 1px solid var(--borde); padding-top: 18px; }
-    .valor b { display: block; font-size: 19px; margin-bottom: 4px; }
-    .valor p { color: var(--suave); font-size: 15px; }
-    @media (max-width: 680px) { .valores { grid-template-columns: 1fr; } }
-    footer { border-top: 1px solid var(--borde); padding: 32px 0 48px; color: var(--suave); font-size: 14px; }
-    footer .envoltura { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
-    footer a { text-decoration: none; } footer a:hover { color: var(--texto); }
-  </style>
+  <link rel="preload" href="/fuentes/unbounded.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fuentes/anton.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/estilos.css">
 </head>
-<body>
-  <header><div class="envoltura"><a class="marca" href="/">ByFoogles<span>.</span></a></div></header>
+<body class="cargando">
+
+  <!-- Pantalla de carga: el nombre se prende como un cartel de neón -->
+  <div class="carga" aria-hidden="true">
+    <div class="carga-nombre">
+      <span>B</span><span>Y</span><span>F</span><span>O</span><span>O</span><span>G</span><span>L</span><span>E</span><span>S</span>
+    </div>
+    <div class="carga-pie"><span>Estudio de apps</span><span class="carga-numero">000</span></div>
+  </div>
+
+  <div class="cursor" aria-hidden="true"></div>
+
+  <header class="cabecera">
+    <a class="logo" href="#inicio" aria-label="ByFoogles, inicio">BYFOOGLES<sup>®</sup></a>
+    <nav>
+      <a href="#apps"><i></i>Apps</a>
+      <a href="#estudio">Estudio</a>
+      <a href="#manifiesto">Manifiesto</a>
+    </nav>
+    <div class="cabecera-der">
+      <span class="reloj"><b>ARG</b> <span id="hora">--:--</span></span>
+      <a class="boton-circulo" href="https://dalequeva.byfoogles.app" aria-label="Ir a Dale Que Va">↗</a>
+    </div>
+  </header>
+
   <main>
-    <section class="portada envoltura">
-      <p class="etiqueta">Estudio de apps · Argentina</p>
-      <h1>Apps simples, <em>hechas para usarse</em> de verdad.</h1>
-      <p class="lema">ByFoogles es un estudio independiente. Hacemos apps sin anuncios, sin cuentas y que funcionan sin internet.</p>
+    <!-- ============================ PORTADA ============================ -->
+    <section class="portada" id="inicio">
+      <canvas id="aurora" aria-hidden="true"></canvas>
+      <div class="estrellas" aria-hidden="true"></div>
+      <div class="grano" aria-hidden="true"></div>
+
+      <div class="portada-contenido">
+        <p class="sobre">Estudio independiente · Hecho en Argentina</p>
+        <h1 class="titulo-ancho" data-partir>
+          <span class="linea">Ideas que</span>
+          <span class="linea">se prenden</span>
+          <span class="linea">como <em>neón</em></span>
+        </h1>
+        <a class="entrar" href="#apps"><span class="destello">✦</span> Explorar las apps</a>
+      </div>
+
+      <aside class="datos-der" aria-hidden="true">
+        <p><small>N.º</small> 001</p>
+        <p><small>EST.</small> 2026</p>
+        <p class="separado"><small>Último lanzamiento</small><b>Dale Que Va</b></p>
+        <div class="orbita"><i></i><i></i><i></i></div>
+      </aside>
+
+      <div class="lateral" aria-hidden="true">Deslizá para explorar</div>
+      <div class="indicadores" aria-hidden="true"><i class="activo"></i><i></i><i></i><i></i></div>
+
+      <div class="tira">
+        <a class="tira-app" href="https://dalequeva.byfoogles.app">
+          <img src="/img/dalequeva.webp" alt="" width="64" height="64">
+          <span><small>● Nuevo</small><b>Dale Que Va</b><em>Android · Juegos de previa</em></span>
+        </a>
+        <span class="tira-dato"><b>24</b> juegos en una app</span>
+        <span class="tira-dato"><b>0</b> anuncios</span>
+        <span class="tira-dato"><b>0</b> cuentas</span>
+        <span class="tira-dato"><b>100%</b> sin internet</span>
+      </div>
     </section>
 
-    <section class="apps envoltura">
-      <h2>Nuestras apps</h2>
-      <a class="app" href="https://dalequeva.byfoogles.app">
-        <img src="/img/dalequeva.webp" alt="Ícono de Dale Que Va" width="120" height="120">
-        <div>
-          <h3>Dale Que Va <span class="chip">+18</span></h3>
-          <p>24 juegos de previa en un solo celu que pasa de mano en mano: Verdad o Reto, Yo Nunca, El Juego del Rey, Ruleta Rusa y más.</p>
-          <p class="datos">Android · Gratis con nivel Hot opcional · Sin internet</p>
+    <!-- ============================ APP DESTACADA ============================ -->
+    <section class="destacada" id="apps">
+      <div class="destacada-reparto" aria-hidden="true">
+        <span>Verdad o Reto</span><span>Yo Nunca</span><span>Juego del Rey</span><span>Ruleta Rusa</span>
+      </div>
+      <div class="destacada-escena">
+        <h2 class="titulo-gigante" aria-label="Dale Que Va">
+          <span class="parte izq">DALE</span><span class="parte der">QUE VA</span>
+        </h2>
+        <div class="destacada-icono">
+          <div class="halo"></div>
+          <img src="/img/dalequeva.webp" alt="Ícono de Dale Que Va" width="420" height="420">
         </div>
-        <span class="ir">Ver la app →</span>
-      </a>
-      <div class="proximamente">Más apps en camino.</div>
+        <span class="anio">[2026]</span>
+        <a class="sello" href="https://dalequeva.byfoogles.app" aria-label="Ver Dale Que Va">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <defs><path id="circulo" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+            <text><textPath href="#circulo">DALE QUE VA • +18 • ANDROID • GRATIS •</textPath></text>
+          </svg>
+          <b>↗</b>
+        </a>
+      </div>
+
+      <div class="destacada-pie">
+        <div class="destacada-texto revelar">
+          <p class="sobre rojo">● App N.º 001 · Juegos de previa</p>
+          <p>24 juegos para la previa en un solo celu que pasa de mano en mano. Tres niveles de picante, sin internet y sin anuncios. Cargás los nombres una vez y la app se encarga del resto.</p>
+          <a class="boton-neon" href="https://dalequeva.byfoogles.app">Ver la app <span>↗</span></a>
+        </div>
+        <div class="circulos revelar">
+          <div class="circulo blanco"><small>Juegos</small><b>24</b></div>
+          <div class="circulo rojo"><small>Edad</small><b>+18</b></div>
+          <div class="circulo vacio"><small>Niveles</small><b>3</b></div>
+        </div>
+        <blockquote class="cita revelar">“Arrancá tranqui, entrá en confianza y terminá sin filtros.”</blockquote>
+      </div>
+
+      <div class="cinta" aria-hidden="true">
+        <div class="cinta-pista">
+          <span>😈 Verdad o Reto</span><span>🙊 Yo Nunca Nunca</span><span>🤴 El Juego del Rey</span><span>🔫 Ruleta Rusa</span><span>🍾 La Botellita</span><span>⚔️ Versus</span><span>🎲 El Viaje Prohibido</span><span>⚖️ ¿Qué Preferís?</span><span>👑 Mazo del Rey Criollo</span><span>🍺 Vaso Lleno</span><span>🃏 Blackjack Criollo</span><span>♠️ Poker</span>
+          <span>😈 Verdad o Reto</span><span>🙊 Yo Nunca Nunca</span><span>🤴 El Juego del Rey</span><span>🔫 Ruleta Rusa</span><span>🍾 La Botellita</span><span>⚔️ Versus</span><span>🎲 El Viaje Prohibido</span><span>⚖️ ¿Qué Preferís?</span><span>👑 Mazo del Rey Criollo</span><span>🍺 Vaso Lleno</span><span>🃏 Blackjack Criollo</span><span>♠️ Poker</span>
+        </div>
+      </div>
     </section>
 
-    <section class="valores envoltura">
-      <div class="valor"><b>Sin anuncios</b><p>Nada de publicidad interrumpiendo. Si algo se paga, se paga una vez y listo.</p></div>
-      <div class="valor"><b>Sin cuentas</b><p>No pedimos registro ni datos. Lo tuyo queda en tu celu.</p></div>
-      <div class="valor"><b>Sin internet</b><p>Las apps funcionan offline: en la previa, en el viaje o donde no hay señal.</p></div>
+    <!-- ============================ ESTUDIO (claro) ============================ -->
+    <section class="estudio" id="estudio">
+      <div class="estudio-titulo">
+        <h2 class="titulo-condensado" data-partir-letras>Hecho</h2>
+        <span class="por">por</span>
+        <h2 class="titulo-condensado" data-partir-letras>Foogles</h2>
+      </div>
+      <div class="estudio-columnas">
+        <p class="sobre">● Sobre el estudio</p>
+        <p class="estudio-lema revelar">ByFoogles es un estudio independiente: diseño, código y contenido hechos en casa. Hacemos apps chicas, prolijas y con personalidad, pensadas para usarse con amigos y no para tenerte mirando la pantalla.</p>
+        <div class="estudio-datos revelar">
+          <div><small>Base</small><b>Argentina</b></div>
+          <div><small>Plataforma</small><b>Android</b></div>
+          <div><small>Desde</small><b>2026</b></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ MANIFIESTO ============================ -->
+    <section class="manifiesto" id="manifiesto">
+      <p class="sobre">● Manifiesto</p>
+      <ol>
+        <li class="revelar"><span>01</span><h3>Sin anuncios</h3><p>Nada de publicidad cortando el juego. Si algo se paga, se paga una vez y listo.</p></li>
+        <li class="revelar"><span>02</span><h3>Sin cuentas</h3><p>No pedimos registro ni datos. Lo tuyo queda en tu celu.</p></li>
+        <li class="revelar"><span>03</span><h3>Sin internet</h3><p>Las apps funcionan offline: en la previa, en el viaje o donde no hay señal.</p></li>
+      </ol>
+    </section>
+
+    <!-- ============================ PRÓXIMAMENTE ============================ -->
+    <section class="proximas">
+      <p class="sobre">● Lo que viene</p>
+      <div class="proximas-grilla">
+        <a class="proxima lista" href="https://dalequeva.byfoogles.app">
+          <img src="/img/dalequeva.webp" alt="" width="72" height="72">
+          <small>N.º 001 · Disponible</small><b>Dale Que Va</b>
+        </a>
+        <div class="proxima"><span class="candado">✦</span><small>N.º 002 · En desarrollo</small><b>Muy pronto</b></div>
+        <div class="proxima"><span class="candado">✦</span><small>N.º 003 · Idea</small><b>Secreto</b></div>
+      </div>
     </section>
   </main>
-  <footer>
-    <div class="envoltura">
-      <span>© <span id="anio"></span> ByFoogles</span>
-      <span><a href="https://dalequeva.byfoogles.app">Dale Que Va</a></span>
+
+  <footer class="pie">
+    <div class="pie-gigante" aria-hidden="true">BYFOOGLES</div>
+    <div class="pie-fila">
+      <span>© <span id="anio"></span> ByFoogles · Estudio de apps · Argentina</span>
+      <a href="https://dalequeva.byfoogles.app">Dale Que Va ↗</a>
     </div>
   </footer>
-  <script>document.getElementById("anio").textContent = new Date().getFullYear();</script>
+
+  <script src="/app.js"></script>
 </body>
 </html>
