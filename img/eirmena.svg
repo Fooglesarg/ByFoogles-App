@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108">
+  <!-- Ícono de Eirmena: luna creciente (Mena) que abraza una gota (Eir). -->
+  <rect width="108" height="108" fill="#C8694F"/>
+  <path d="M0,72 C30,62 70,84 108,70 L108,108 L0,108 Z" fill="#B85A44"/>
+  <path d="M58,26 A28,28 0 1,0 58,82 A34,34 0 0,1 58,26 Z" fill="#FBF4EC"/>
+  <path d="M62,38 C62,38 74,52 74,60 A12,12 0 0,1 50,60 C50,52 62,38 62,38 Z" fill="#F2D3CB"/>
+</svg>

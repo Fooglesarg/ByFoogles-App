@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Eirmena · Beta privada · ByFoogles</title>
+  <meta name="description" content="Eirmena: app de ciclo menstrual sin internet, gratis y de código abierto. Versión beta de acceso privado.">
+  <!-- Beta de acceso privado: que no aparezca en buscadores. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FBF4EC">
+  <link rel="icon" href="/img/eirmena.svg" type="image/svg+xml">
+  <style>
+    @font-face { font-family: "Comfortaa"; src: url("/fuentes/comfortaa.otf") format("opentype"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: "Outfit"; src: url("/fuentes/outfit.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+    :root {
+      --crema: #FBF4EC; --crema-oscura: #F3E6D8; --tarjeta: #FFFBF7;
+      --terracota: #C8694F; --terracota-oscura: #9E4A35; --rosa: #E8B9AE; --rosa-claro: #F6DED7;
+      --vino: #6E3036; --salvia: #8FA98A; --texto: #3A2925; --suave: #7D6760; --linea: #E6D5C7;
+      --margen: clamp(18px, 5vw, 64px); --ease: cubic-bezier(.2, .8, .2, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Outfit", system-ui, sans-serif; background: var(--crema); color: var(--texto); line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: "Comfortaa", sans-serif; color: var(--vino); line-height: 1.1; }
+
+    .cabecera { display: flex; justify-content: space-between; align-items: center; padding: 22px var(--margen); }
+    .volver { text-decoration: none; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; color: var(--suave); transition: color .2s, gap .3s var(--ease); display: inline-flex; gap: 8px; }
+    .volver:hover { color: var(--vino); gap: 14px; }
+    .firma { font-size: 12px; color: var(--suave); }
+
+    .portada { position: relative; padding: clamp(30px, 6vw, 70px) var(--margen) 60px; display: grid; grid-template-columns: auto 1fr; gap: clamp(24px, 5vw, 64px); align-items: center; max-width: 1200px; margin: 0 auto; }
+    .portada::before { content: ""; position: absolute; z-index: -1; width: 70vw; max-width: 760px; aspect-ratio: 1; left: -18%; top: -30%; border-radius: 50%; background: radial-gradient(circle, rgba(232, 185, 174, .7), transparent 65%); filter: blur(10px); }
+    .icono { width: clamp(130px, 22vw, 230px); aspect-ratio: 1; border-radius: 26%; box-shadow: 0 30px 60px rgba(110, 48, 54, .25); animation: flotar 6s ease-in-out infinite; }
+    @keyframes flotar { 50% { transform: translateY(-10px) rotate(-2deg); } }
+    .etiquetas { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .chip { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: var(--rosa-claro); color: var(--vino); }
+    .chip.beta { background: var(--terracota); color: #fff; box-shadow: 0 0 0 0 rgba(200, 105, 79, .6); animation: latir 2.4s infinite; }
+    @keyframes latir { 70% { box-shadow: 0 0 0 12px rgba(200, 105, 79, 0); } }
+    .portada h1 { font-size: clamp(54px, 10vw, 120px); letter-spacing: -.02em; }
+    .lema { font-size: clamp(18px, 2.2vw, 24px); margin-top: 12px; max-width: 560px; }
+    .lema b { color: var(--terracota-oscura); }
+
+    main > section { max-width: 1200px; margin: 0 auto; padding: 0 var(--margen); }
+    .grilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 20px 0 60px; }
+    .item { background: var(--tarjeta); border-radius: 24px; padding: 22px; }
+    .item b { display: block; font-family: "Comfortaa", sans-serif; color: var(--vino); margin-bottom: 6px; }
+    .item p { color: var(--suave); font-size: 15px; }
+    @media (max-width: 860px) { .grilla { grid-template-columns: 1fr 1fr; } .portada { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { .grilla { grid-template-columns: 1fr; } }
+
+    .privacidad { background: var(--vino); color: var(--crema); border-radius: 32px; padding: clamp(26px, 5vw, 48px); display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; align-items: center; margin-bottom: 60px; }
+    .privacidad h2 { color: var(--crema); font-size: clamp(26px, 3.4vw, 40px); }
+    .privacidad ul { list-style: none; display: grid; gap: 10px; }
+    .privacidad li::before { content: "✦ "; color: var(--rosa); }
+    @media (max-width: 860px) { .privacidad { grid-template-columns: 1fr; } }
+
+    /* ---------- Acceso privado ---------- */
+    .acceso { background: var(--tarjeta); border: 2px dashed var(--rosa); border-radius: 32px; padding: clamp(26px, 5vw, 48px); text-align: center; margin-bottom: 60px; }
+    .acceso h2 { font-size: clamp(26px, 3.4vw, 38px); margin: 10px 0 8px; }
+    .acceso > p { color: var(--suave); max-width: 520px; margin: 0 auto; }
+    .candado { width: 54px; height: 54px; margin: 0 auto; }
+    .candado .arco { transition: transform .6s var(--ease); transform-origin: 34px 24px; }
+    .abierto .candado .arco { transform: translateY(-6px) rotate(-28deg); }
+    form { display: flex; gap: 10px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .casillas { display: flex; gap: 10px; }
+    .casillas input { width: 56px; height: 66px; text-align: center; font-family: "Comfortaa", sans-serif; font-size: 28px; color: var(--vino); border: 2px solid var(--linea); border-radius: 18px; background: var(--crema); outline: none; transition: border-color .2s, transform .2s; }
+    .casillas input:focus { border-color: var(--terracota); transform: translateY(-2px); }
+    .error .casillas { animation: temblar .4s; }
+    .error .casillas input { border-color: #B3261E; }
+    @keyframes temblar { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+    .mensaje { min-height: 24px; margin-top: 12px; color: #B3261E; font-size: 14px; }
+    .boton { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; border-radius: 999px; border: 0; background: var(--terracota); color: #fff; font: 700 16px "Outfit", sans-serif; text-decoration: none; cursor: pointer; box-shadow: 0 12px 30px rgba(200, 105, 79, .35); transition: transform .3s var(--ease), background .3s; }
+    .boton:hover { transform: translateY(-3px); background: var(--terracota-oscura); }
+    .contenido { display: none; margin-top: 26px; text-align: left; }
+    .abierto .contenido { display: block; animation: aparecer .8s var(--ease); }
+    .abierto form, .abierto .mensaje { display: none; }
+    @keyframes aparecer { from { opacity: 0; transform: translateY(16px); } }
+    .descarga { text-align: center; margin-bottom: 26px; }
+    .descarga small { display: block; color: var(--suave); margin-top: 10px; }
+    .pasos { counter-reset: paso; list-style: none; display: grid; gap: 12px; max-width: 640px; margin: 0 auto; }
+    .pasos li { counter-increment: paso; display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; }
+    .pasos li::before { content: counter(paso); width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--rosa-claro); color: var(--vino); font-weight: 700; }
+    .nota { max-width: 640px; margin: 22px auto 0; background: var(--crema-oscura); border-radius: 20px; padding: 18px 20px; font-size: 15px; }
+    .nota a { color: var(--terracota-oscura); }
+
+    .pie { text-align: center; padding: 10px var(--margen) 40px; color: var(--suave); font-size: 13px; }
+    .pie b { color: var(--vino); }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="cabecera">
+    <a class="volver" href="/">← ByFoogles</a>
+    <span class="firma">App N.º 002</span>
+  </header>
+
+  <main>
+    <div class="portada">
+      <img class="icono" src="/img/eirmena.svg" alt="Ícono de Eirmena: una luna creciente que abraza una gota">
+      <div>
+        <div class="etiquetas"><span class="chip beta">Beta</span><span class="chip">Acceso privado</span><span class="chip">Android</span></div>
+        <h1>Eirmena</h1>
+        <p class="lema">Tu ciclo, tus datos, tu teléfono. Una app para acompañar el ciclo menstrual <b>sin internet</b>, <b>gratis</b> y de <b>código abierto</b>.</p>
+      </div>
+    </div>
+
+    <section>
+      <div class="grilla">
+        <div class="item"><b>Tu ciclo</b><p>Calendario, predicción con rango, aviso de retraso y fases explicadas.</p></div>
+        <div class="item"><b>Tu día</b><p>Sangrado, síntomas, ánimo, energía, sueño, deseo y relaciones.</p></div>
+        <div class="item"><b>Anticonceptivos</b><p>Pastilla, parche, anillo, inyección, implante y DIU, con recordatorios.</p></div>
+        <div class="item"><b>Cada etapa</b><p>Buscar embarazo, embarazo semana a semana, perimenopausia y primeros ciclos.</p></div>
+        <div class="item"><b>Aprender</b><p>Gráfico de hormonas, asistente de retraso y artículos con fuentes.</p></div>
+        <div class="item"><b>Para la consulta</b><p>Estadísticas y un informe en PDF para llevar a tu médica o médico.</p></div>
+      </div>
+
+      <div class="privacidad">
+        <h2>Lo tuyo queda en tu teléfono.</h2>
+        <ul>
+          <li>Sin permiso de internet: no puede enviar nada.</li>
+          <li>Sin cuentas, sin publicidad, sin estadísticas de uso.</li>
+          <li>PIN o huella y respaldo cifrado con tu contraseña.</li>
+          <li>Gratis para siempre, sin versión paga.</li>
+        </ul>
+      </div>
+
+      <div class="acceso" id="acceso">
+        <svg class="candado" viewBox="0 0 68 68" aria-hidden="true">
+          <path class="arco" d="M22 30 V22 a12 12 0 0 1 24 0 V30" fill="none" stroke="#9E4A35" stroke-width="5" stroke-linecap="round"/>
+          <rect x="14" y="29" width="40" height="30" rx="8" fill="#C8694F"/>
+          <circle cx="34" cy="42" r="4" fill="#FBF4EC"/><rect x="32.5" y="44" width="3" height="7" rx="1.5" fill="#FBF4EC"/>
+        </svg>
+        <h2>Versión de prueba</h2>
+        <p>Eirmena está en beta y la están probando personas invitadas. Si te pasaron un código, ingresalo para descargarla.</p>
+
+        <form id="formulario" autocomplete="off">
+          <div class="casillas">
+            <input inputmode="numeric" maxlength="1" aria-label="Dígito 1">
+            <input inputmode="numeric" maxlength="1" aria-label="Dígito 2">
+            <input inputmode="numeric" maxlength="1" aria-label="Dígito 3">
+            <input inputmode="numeric" maxlength="1" aria-label="Dígito 4">
+          </div>
+          <button class="boton" type="submit">Entrar</button>
+        </form>
+        <p class="mensaje" id="mensaje" role="alert"></p>
+
+        <div class="contenido">
+          <div class="descarga">
+            <a class="boton" href="https://github.com/Fooglesarg/Eirmena/releases/download/v1.0.0-beta.1/Eirmena-1.0.0-beta.1.apk">Descargar Eirmena beta ↓</a>
+            <small>Versión 1.0.0-beta.1 · 2,6 MB · Android 8 o más nuevo</small>
+          </div>
+          <ol class="pasos">
+            <li><span>Tocá el botón desde tu celular Android y abrí el archivo descargado.</span></li>
+            <li><span>Android te va a pedir permiso para instalar apps de esta fuente: aceptalo.</span></li>
+            <li><span>Si aparece "desarrollador desconocido" o Play Protect, tocá <b>Instalar de todos modos</b>. Pasa con cualquier app que no viene de Google Play.</span></li>
+            <li><span>Abrila, elegí tu etapa y usala unos días como si fuera tuya.</span></li>
+          </ol>
+          <div class="nota">
+            <b>Tu opinión es lo más importante.</b> Contale a quien te pasó el código qué te confundió, qué te gustó y qué le falta.
+            Es una versión beta: puede tener errores, y no es un método anticonceptivo ni reemplaza la consulta médica.
+            <br><br>El código es abierto: <a href="https://github.com/Fooglesarg/Eirmena">github.com/Fooglesarg/Eirmena</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">Desarrollado por <b>ByFooglesFrames</b> · Licencia GPL-3.0 · Inspirada en Eir y Mena</footer>
+
+  <script>
+    // Acceso privado de la beta. El código no está escrito acá: se compara su resumen SHA-256.
+    // No es seguridad de verdad (el APK y el código son públicos); solo una puerta para la beta.
+    const RESUMEN = "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0";
+    const acceso = document.getElementById("acceso");
+    const formulario = document.getElementById("formulario");
+    const casillas = [...formulario.querySelectorAll("input")];
+    const mensaje = document.getElementById("mensaje");
+
+    const abrir = () => acceso.classList.add("abierto");
+    if (sessionStorage.getItem("eirmena-acceso") === "1") abrir();
+
+    casillas.forEach((c, i) => {
+      c.addEventListener("input", () => {
+        c.value = c.value.replace(/\D/g, "").slice(-1);
+        if (c.value && i < casillas.length - 1) casillas[i + 1].focus();
+        if (casillas.every((x) => x.value)) formulario.requestSubmit();
+      });
+      c.addEventListener("keydown", (e) => { if (e.key === "Backspace" && !c.value && i > 0) casillas[i - 1].focus(); });
+      c.addEventListener("paste", (e) => {
+        const texto = (e.clipboardData.getData("text") || "").replace(/\D/g, "").slice(0, 4);
+        if (!texto) return;
+        e.preventDefault();
+        [...texto].forEach((d, k) => { if (casillas[k]) casillas[k].value = d; });
+        if (texto.length === 4) formulario.requestSubmit();
+      });
+    });
+
+    async function resumen(texto) {
+      const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(texto));
+      return [...new Uint8Array(bytes)].map((b) => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    formulario.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const codigo = casillas.map((c) => c.value).join("");
+      if (codigo.length < 4) { mensaje.textContent = "Son 4 números."; return; }
+      if (await resumen(codigo) === RESUMEN) {
+        sessionStorage.setItem("eirmena-acceso", "1");
+        mensaje.textContent = "";
+        abrir();
+      } else {
+        acceso.classList.remove("error"); void acceso.offsetWidth; acceso.classList.add("error");
+        mensaje.textContent = "Ese código no es. Pedíselo a quien te invitó.";
+        casillas.forEach((c) => (c.value = ""));
+        casillas[0].focus();
+      }
+    });
+  </script>
+</body>
+</html>
